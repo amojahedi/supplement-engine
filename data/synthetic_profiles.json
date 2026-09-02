@@ -1,0 +1,2430 @@
+{
+  "schema_version": "phase1-v1",
+  "disclaimer": "SYNTHETIC DATA · RESEARCH PROTOTYPE · NOT MEDICAL ADVICE. Fabricated profiles for engineering a safety-in-code reasoning engine.",
+  "reference_ranges_illustrative_only": {
+    "ferritin": {
+      "unit": "ng/mL",
+      "low": 30,
+      "high_f": 200,
+      "high_m": 400,
+      "note": "iron deficiency < 30; overload risk when high"
+    },
+    "vitamin_d_25oh": {
+      "unit": "ng/mL",
+      "deficient": 20,
+      "insufficient": 30,
+      "high": 100
+    },
+    "b12": {
+      "unit": "pg/mL",
+      "low": 200,
+      "borderline": 300,
+      "high": 900
+    },
+    "folate": {
+      "unit": "ng/mL",
+      "low": 4,
+      "high": 20
+    },
+    "tsh": {
+      "unit": "mIU/L",
+      "low": 0.4,
+      "high": 4.0,
+      "note": "subclinical vs overt thresholds owned by rules engine"
+    },
+    "hba1c": {
+      "unit": "%",
+      "normal": 5.7,
+      "prediabetes": 6.5
+    },
+    "lipids": {
+      "unit": "mg/dL"
+    }
+  },
+  "count": 30,
+  "profiles": [
+    {
+      "profile_id": "P01",
+      "tags": [
+        "conflicting_priority"
+      ],
+      "demographics": {
+        "age": 34,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 12,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 18,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 210,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 6,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.1,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.3,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 180,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 100,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 55,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 90,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "vegetarian",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Fatigue, heavy menstrual periods."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "iron",
+            "reason": "Ferritin 12 ng/mL — iron deficiency; menstrual loss."
+          },
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 18 ng/mL — deficient; low sun, vegetarian."
+          },
+          {
+            "supplement": "vitamin B12",
+            "reason": "B12 210 pg/mL — borderline low on vegetarian diet."
+          }
+        ],
+        "priority_order": [
+          "iron",
+          "vitamin D3",
+          "vitamin B12"
+        ],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Three deficits; iron is prioritized as most symptomatic and at highest risk of progressing to anemia. Priority ordering matters."
+      }
+    },
+    {
+      "profile_id": "P02",
+      "tags": [
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 58,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 120,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 34,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 500,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 10,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.8,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.5,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 240,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 150,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 38,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 320,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "warfarin"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Elevated triglycerides; asks about fish oil."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "high-dose omega-3 (fish oil)",
+            "reason": "Supplement–medication interaction with warfarin: additive bleeding risk. The otherwise-obvious rec for TG 320 is blocked."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": false,
+        "rationale": "High triglycerides would ordinarily suggest omega-3, but warfarin makes that unsafe without clinician oversight. Contraindication overrides the obvious recommendation."
+      }
+    },
+    {
+      "profile_id": "P03",
+      "tags": [
+        "in_range_no_trigger"
+      ],
+      "demographics": {
+        "age": 41,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 32,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 31,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 205,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 5,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 3.9,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.6,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 185,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 110,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 50,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 120,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Routine check, feels well."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "Every value sits just inside range (ferritin 32, D 31, B12 205, TSH 3.9, HbA1c 5.6). Nothing crosses a threshold — no supplement is indicated. Guards against false-positive triggering on near-boundary values."
+      }
+    },
+    {
+      "profile_id": "P04",
+      "tags": [
+        "referral_recommend_nothing"
+      ],
+      "demographics": {
+        "age": 52,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 90,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 28,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 400,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 9,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.4,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 10.1,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 210,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 130,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 40,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 180,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Increased thirst, weight loss, blurry vision. No diabetes diagnosis."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "HbA1c 10.1% with classic symptoms indicates likely undiagnosed diabetes. This is a medical diagnosis, not a supplement problem. Escalation rule forces clinician referral and suppresses all other output."
+      }
+    },
+    {
+      "profile_id": "P05",
+      "tags": [
+        "pregnancy",
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 29,
+        "sex": "female",
+        "pregnant": true
+      },
+      "labs": {
+        "ferritin": {
+          "value": 18,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 22,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 350,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 5,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.9,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.1,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 175,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 95,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 62,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 110,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "pregnant_12_weeks",
+        "notes": "First trimester. Not yet on a prenatal vitamin."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "folate (folic acid)",
+            "reason": "Pregnancy: neural-tube-defect prevention; folate 5 ng/mL at low end."
+          },
+          {
+            "supplement": "prenatal iron",
+            "reason": "Ferritin 18 ng/mL with increased pregnancy demand."
+          },
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 22 ng/mL — insufficient; low sun."
+          }
+        ],
+        "priority_order": [
+          "folate (folic acid)",
+          "prenatal iron",
+          "vitamin D3"
+        ],
+        "block": [
+          {
+            "supplement": "high-dose vitamin A (retinol)",
+            "reason": "Teratogenic in pregnancy — supplement–condition contraindication."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": false,
+        "rationale": "Pregnancy case: folate is the priority. High-dose vitamin A is hard-blocked. All recommendations must be delivered under obstetric care, so a clinician referral accompanies the output."
+      }
+    },
+    {
+      "profile_id": "P06",
+      "tags": [
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 61,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 80,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 33,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 180,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 8,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 6.8,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 190,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 105,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 52,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 140,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "metformin"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Type 2 diabetes, well-controlled."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin B12",
+            "reason": "B12 180 pg/mL. Metformin is a documented cause of B12 depletion (supplement–medication interaction working in the deficiency direction)."
+          }
+        ],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Metformin lowers B12 absorption; the low B12 is explained by the medication and B12 repletion is indicated. HbA1c 6.8% is an existing, managed diagnosis — no referral needed for that alone."
+      }
+    },
+    {
+      "profile_id": "P07",
+      "tags": [],
+      "demographics": {
+        "age": 45,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 14,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 29,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 420,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 11,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 3.2,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.4,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 195,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 115,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 58,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 100,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "levothyroxine"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Hypothyroid, stable on levothyroxine."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "iron",
+            "reason": "Ferritin 14 ng/mL — iron deficiency."
+          }
+        ],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [
+          {
+            "supplement": "iron",
+            "caution": "Separate iron from levothyroxine by >=4 hours — iron chelates and reduces levothyroxine absorption (supplement–medication interaction)."
+          }
+        ],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Iron is indicated, but administration timing must avoid the levothyroxine absorption interaction. Recommendation ships with a timing caution, not a block."
+      }
+    },
+    {
+      "profile_id": "P08",
+      "tags": [
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 37,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 95,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 30,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 480,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 12,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.6,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.2,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 200,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 120,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 50,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 130,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "sertraline"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Currently self-medicating with St John's Wort for mood."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "St John's Wort",
+            "reason": "Supplement–medication interaction with sertraline (SSRI): serotonin syndrome risk. Must be stopped."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": false,
+        "rationale": "Active dangerous interaction already in progress. Block St John's Wort and refer to the prescribing clinician. No new supplement is added on top."
+      }
+    },
+    {
+      "profile_id": "P09",
+      "tags": [],
+      "demographics": {
+        "age": 26,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 45,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 27,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 150,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 9,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.2,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.0,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 170,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 90,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 60,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 80,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "vegan",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Vegan 4 years."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin B12",
+            "reason": "B12 150 pg/mL on a vegan diet — dietary deficiency, clearly indicated."
+          },
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 27 ng/mL — insufficient."
+          }
+        ],
+        "priority_order": [
+          "vitamin B12",
+          "vitamin D3"
+        ],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Classic vegan B12 deficiency plus insufficient vitamin D. Straightforward dietary-gap repletion."
+      }
+    },
+    {
+      "profile_id": "P10",
+      "tags": [],
+      "demographics": {
+        "age": 33,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 70,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 15,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 500,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 14,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.9,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.3,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 180,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 100,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 55,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 95,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "very_low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Indoor office worker, minimal sun."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 15 ng/mL — deficient; very low sun exposure."
+          }
+        ],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Single clear deficiency (vitamin D) with a matching lifestyle cause."
+      }
+    },
+    {
+      "profile_id": "P11",
+      "tags": [],
+      "demographics": {
+        "age": 23,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 8,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 32,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 400,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 10,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.1,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.1,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 165,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 85,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 63,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 75,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Heavy menstrual bleeding, fatigue."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "iron",
+            "reason": "Ferritin 8 ng/mL — marked iron deficiency; menstrual loss."
+          }
+        ],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Isolated, marked iron deficiency with a clear cause."
+      }
+    },
+    {
+      "profile_id": "P12",
+      "tags": [
+        "in_range_no_trigger"
+      ],
+      "demographics": {
+        "age": 72,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 140,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 35,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 340,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 12,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.5,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.6,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 185,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 108,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 48,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 130,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Age-aware ranges apply."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "B12 340 pg/mL is adequate; all values are appropriate for a 72-year-old. Nothing crosses an age-aware threshold — no supplement indicated."
+      }
+    },
+    {
+      "profile_id": "P13",
+      "tags": [
+        "conflicting_priority"
+      ],
+      "demographics": {
+        "age": 39,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 11,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 17,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 190,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 3,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.3,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.2,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 160,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 88,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 57,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 85,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [
+          "celiac_disease"
+        ],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Newly managed celiac; malabsorption pattern."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "iron",
+            "reason": "Ferritin 11 — deficiency from malabsorption."
+          },
+          {
+            "supplement": "folate",
+            "reason": "Folate 3 ng/mL — deficient."
+          },
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 17 — deficient."
+          },
+          {
+            "supplement": "vitamin B12",
+            "reason": "B12 190 — low."
+          }
+        ],
+        "priority_order": [
+          "iron",
+          "folate",
+          "vitamin B12",
+          "vitamin D3"
+        ],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": false,
+        "rationale": "Multiple deficiencies driven by celiac malabsorption. Repletion is indicated but the underlying GI condition needs clinician management, so a referral accompanies the recommendations."
+      }
+    },
+    {
+      "profile_id": "P14",
+      "tags": [
+        "contraindication_block",
+        "referral_recommend_nothing"
+      ],
+      "demographics": {
+        "age": 54,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 60,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 26,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 410,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 3,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.5,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 200,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 118,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 54,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 140,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "methotrexate"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Rheumatoid arthritis on methotrexate."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "self-directed folate/folic acid",
+            "reason": "Folate dosing/timing around methotrexate is therapeutically coupled and clinician-managed (supplement–medication interaction). Do not self-start."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "Low folate would normally prompt folate, but with methotrexate the folate regimen is part of the drug therapy and must be set by the prescriber. Defer entirely to the clinician."
+      }
+    },
+    {
+      "profile_id": "P15",
+      "tags": [],
+      "demographics": {
+        "age": 48,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 110,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 30,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 460,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 13,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.1,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 6.1,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 205,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 125,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 44,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 165,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Prediabetic range HbA1c."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "HbA1c 6.1% is prediabetes — addressed by lifestyle and clinician follow-up, not a supplement. No micronutrient deficiency present, so no supplement is recommended (lifestyle counseling noted outside supplement scope)."
+      }
+    },
+    {
+      "profile_id": "P16",
+      "tags": [
+        "pregnancy",
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 31,
+        "sex": "female",
+        "pregnant": true
+      },
+      "labs": {
+        "ferritin": {
+          "value": 40,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 25,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 380,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 8,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.7,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.0,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 178,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 96,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 60,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 120,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "pregnant_20_weeks",
+        "notes": "Already taking a high-dose retinol (vitamin A) beauty supplement."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "folate (folic acid)",
+            "reason": "Pregnancy standard of care."
+          }
+        ],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "high-dose vitamin A (retinol)",
+            "reason": "Teratogenic — must stop. Supplement–condition contraindication (pregnancy)."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": false,
+        "rationale": "Second pregnancy case with an active teratogen exposure. Hard-block retinol, continue folate, and refer for obstetric review of the exposure."
+      }
+    },
+    {
+      "profile_id": "P17",
+      "tags": [
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 66,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 130,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 24,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 470,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 11,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.2,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.7,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 210,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 128,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 46,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 150,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "warfarin"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Asks about vitamin K and vitamin E for 'general health'."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 24 ng/mL — insufficient; low sun."
+          }
+        ],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "vitamin K supplement",
+            "reason": "Antagonizes warfarin — destabilizes INR (supplement–medication interaction)."
+          },
+          {
+            "supplement": "high-dose vitamin E",
+            "reason": "Additive bleeding risk with warfarin."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Vitamin D is safe to recommend; vitamin K and high-dose vitamin E are blocked due to warfarin. Counsel dietary vitamin K consistency (handled by clinician)."
+      }
+    },
+    {
+      "profile_id": "P18",
+      "tags": [
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 59,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 95,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 21,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 430,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 12,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.4,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.6,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 215,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 130,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 55,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 140,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "hydrochlorothiazide"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Wants a high-dose calcium + vitamin D bone product."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin D3 (standard dose)",
+            "reason": "25-OH D 21 ng/mL — insufficient."
+          }
+        ],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "high-dose calcium",
+            "reason": "Thiazide reduces calcium excretion — hypercalcemia risk (supplement–medication interaction). Hard ceiling applies."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Vitamin D repletion is fine; high-dose calcium is blocked because hydrochlorothiazide predisposes to hypercalcemia."
+      }
+    },
+    {
+      "profile_id": "P19",
+      "tags": [
+        "in_range_no_trigger"
+      ],
+      "demographics": {
+        "age": 25,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 60,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 45,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 550,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 15,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.8,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.0,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 165,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 85,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 65,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 70,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "high",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Healthy, active, balanced diet."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "All labs comfortably normal. No deficiency, no risk factor — no supplement."
+      }
+    },
+    {
+      "profile_id": "P20",
+      "tags": [],
+      "demographics": {
+        "age": 50,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 150,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 32,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 500,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 13,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.5,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 245,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 165,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 36,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 190,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Dyslipidemia; no micronutrient deficiency."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "High LDL / low HDL is a cardiovascular-risk matter for a clinician (statin decision, lifestyle), not a micronutrient supplement problem. Refer; recommend no supplement."
+      }
+    },
+    {
+      "profile_id": "P21",
+      "tags": [
+        "conflicting_priority"
+      ],
+      "demographics": {
+        "age": 63,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 85,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 29,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 160,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 3,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.1,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.6,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 195,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 112,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 53,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 130,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Low B12 and low folate together."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin B12",
+            "reason": "B12 160 pg/mL — low."
+          },
+          {
+            "supplement": "folate",
+            "reason": "Folate 3 ng/mL — low."
+          }
+        ],
+        "priority_order": [
+          "vitamin B12",
+          "folate"
+        ],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Both low, but B12 must be assessed/repleted first: correcting folate alone can mask B12 deficiency and allow neurological damage to progress. Priority ordering is a safety property, not a preference."
+      }
+    },
+    {
+      "profile_id": "P22",
+      "tags": [
+        "referral_recommend_nothing"
+      ],
+      "demographics": {
+        "age": 44,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 70,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 31,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 450,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 12,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 6.5,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.3,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 180,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 100,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 58,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 95,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Fatigue, cold intolerance. No thyroid diagnosis."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "TSH 6.5 mIU/L with symptoms suggests subclinical/overt hypothyroidism — a diagnostic and prescribing question. No supplement addresses this; refer and recommend nothing."
+      }
+    },
+    {
+      "profile_id": "P23",
+      "tags": [
+        "contraindication_block",
+        "referral_recommend_nothing"
+      ],
+      "demographics": {
+        "age": 55,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 450,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 33,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 480,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 13,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.9,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.5,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 200,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 120,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 50,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 140,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Fatigue; self-diagnosed 'low iron', wants iron."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "iron",
+            "reason": "Ferritin 450 ng/mL is HIGH — possible iron overload. Iron is contraindicated despite the fatigue narrative. Hard block."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "The intuitive 'tired = take iron' answer is dangerous here: ferritin is high, not low. Block iron and refer to evaluate possible overload/hemochromatosis."
+      }
+    },
+    {
+      "profile_id": "P24",
+      "tags": [
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 69,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 120,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 19,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 500,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 12,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.1,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.6,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 190,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 110,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 47,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 135,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "digoxin"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Asks about a herbal 'energy' blend containing St John's Wort."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 19 ng/mL — deficient."
+          }
+        ],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "St John's Wort",
+            "reason": "Reduces digoxin levels (supplement–medication interaction) — risks loss of therapeutic effect."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Vitamin D is indicated and safe; the St John's Wort–containing blend is blocked because of the digoxin interaction."
+      }
+    },
+    {
+      "profile_id": "P25",
+      "tags": [
+        "contraindication_block",
+        "referral_recommend_nothing"
+      ],
+      "demographics": {
+        "age": 64,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 140,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 20,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 460,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 11,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.3,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 6.2,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 200,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 118,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 45,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 150,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "lisinopril"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Chronic kidney disease stage 3. Asks about potassium and magnesium."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "potassium",
+            "reason": "CKD + ACE inhibitor (lisinopril) → hyperkalemia risk. Hard block."
+          },
+          {
+            "supplement": "magnesium",
+            "reason": "Impaired renal clearance in CKD → accumulation risk."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "Kidney disease plus an ACE inhibitor makes electrolyte supplements dangerous. Even vitamin D dosing in CKD is clinician-managed, so defer entirely and refer."
+      }
+    },
+    {
+      "profile_id": "P26",
+      "tags": [
+        "in_range_no_trigger"
+      ],
+      "demographics": {
+        "age": 28,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 90,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 40,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 520,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 14,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.7,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.1,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 170,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 92,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 60,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 80,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "high",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Amateur athlete seeking 'optimization'."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "No deficiency and no risk factor. 'Optimization' with no measured gap is not a rule hit — recommend nothing rather than invent a benefit."
+      }
+    },
+    {
+      "profile_id": "P27",
+      "tags": [
+        "pregnancy"
+      ],
+      "demographics": {
+        "age": 30,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 55,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 28,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 440,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 4,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.8,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.0,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 172,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 94,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 61,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 90,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "planning_pregnancy",
+        "notes": "Actively trying to conceive."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "folic acid",
+            "reason": "Preconception: folic acid reduces neural-tube-defect risk; start before conception. Folate 4 ng/mL at the low edge."
+          },
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 28 ng/mL — insufficient."
+          }
+        ],
+        "priority_order": [
+          "folic acid",
+          "vitamin D3"
+        ],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Preconception folic acid is the key evidence-based recommendation. Pregnancy-adjacent case where timing (start before conception) matters."
+      }
+    },
+    {
+      "profile_id": "P28",
+      "tags": [
+        "contraindication_block"
+      ],
+      "demographics": {
+        "age": 57,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 100,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 18,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 490,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 12,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.8,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 230,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 155,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 40,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 170,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "atorvastatin"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Considering St John's Wort for low mood."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 18 ng/mL — deficient."
+          }
+        ],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "St John's Wort",
+            "reason": "Induces metabolism of atorvastatin, reducing its effect (supplement–medication interaction)."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": false,
+        "rationale": "Vitamin D is fine to recommend. Block St John's Wort due to the statin interaction and refer for the low-mood concern."
+      }
+    },
+    {
+      "profile_id": "P29",
+      "tags": [
+        "referral_recommend_nothing",
+        "conflicting_priority"
+      ],
+      "demographics": {
+        "age": 47,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 9,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 14,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 130,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 2,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.2,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.4,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 150,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 80,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 42,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 130,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [
+          "unexplained_weight_loss"
+        ],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Multiple severe deficiencies plus unexplained weight loss."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "Severe multi-nutrient deficiency (iron 9, D 14, B12 130, folate 2) with unexplained weight loss points to a systemic underlying cause. Piecemeal supplementation would mask a serious workup — refer and recommend nothing."
+      }
+    },
+    {
+      "profile_id": "P30",
+      "tags": [
+        "in_range_no_trigger"
+      ],
+      "demographics": {
+        "age": 68,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 45,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 33,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 320,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 10,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 3.6,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.6,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 210,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 120,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 58,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 150,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Values that look borderline for a young adult but are age-appropriate."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "TSH 3.6, ferritin 45, B12 320, HbA1c 5.6 are all appropriate for a 68-year-old. Age-aware interpretation prevents over-triggering on values that only look borderline against young-adult intuitions."
+      }
+    }
+  ]
+}
