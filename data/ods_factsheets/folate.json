@@ -1,0 +1,14 @@
+[
+  {
+    "chunk_id": "folate-neural-tube",
+    "supplement": "folate",
+    "source": "NIH Office of Dietary Supplements — Folate Fact Sheet for Health Professionals",
+    "text": "Adequate folate before and during early pregnancy reduces the risk of neural tube defects. People who can become pregnant are advised to obtain folic acid, and supplementation is standard of care in pregnancy and preconception regardless of a single lab value."
+  },
+  {
+    "chunk_id": "folate-upper-limit",
+    "supplement": "folate",
+    "source": "NIH Office of Dietary Supplements — Folate Fact Sheet for Health Professionals",
+    "text": "The tolerable upper intake level applies to synthetic folic acid and is 1000 mcg per day for adults. High folic acid intake can mask the anemia of vitamin B12 deficiency."
+  }
+]

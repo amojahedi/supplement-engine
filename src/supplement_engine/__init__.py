@@ -19,11 +19,47 @@ from .models import (
     RuleHit,
     TimingCaution,
 )
+from .extraction import (
+    ExtractionError,
+    ExtractionResult,
+    UnitConversion,
+    assert_expected_units,
+    extract_profile,
+)
+from .grounding import (
+    Claim,
+    DroppedClaim,
+    GuardedDecision,
+    claims_from_decision,
+    guard_claims,
+)
+from .pipeline import CaseResult, run_case
+from .retrieval import Passage, RetrievedChunk, load_corpus, retrieve
 from .rules import canonical, evaluate
 
 __all__ = [
     "evaluate",
     "canonical",
+    # extraction
+    "extract_profile",
+    "assert_expected_units",
+    "ExtractionResult",
+    "ExtractionError",
+    "UnitConversion",
+    # retrieval
+    "retrieve",
+    "load_corpus",
+    "Passage",
+    "RetrievedChunk",
+    # grounding
+    "guard_claims",
+    "claims_from_decision",
+    "Claim",
+    "DroppedClaim",
+    "GuardedDecision",
+    # pipeline
+    "run_case",
+    "CaseResult",
     "Profile",
     "EngineDecision",
     "Recommendation",
