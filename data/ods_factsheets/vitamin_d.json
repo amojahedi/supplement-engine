@@ -1,0 +1,14 @@
+[
+  {
+    "chunk_id": "vitamin-d-status",
+    "supplement": "vitamin_d",
+    "source": "NIH Office of Dietary Supplements — Vitamin D Fact Sheet for Health Professionals",
+    "text": "Serum 25-hydroxyvitamin D is the main indicator of vitamin D status. Concentrations below 20 ng/mL are generally considered deficient for bone and overall health, and low sun exposure is a common contributing factor."
+  },
+  {
+    "chunk_id": "vitamin-d-upper-limit",
+    "supplement": "vitamin_d",
+    "source": "NIH Office of Dietary Supplements — Vitamin D Fact Sheet for Health Professionals",
+    "text": "The tolerable upper intake level for adults is 4000 IU per day. Sustained intakes above this can cause hypercalcemia. Routine supplementation is usually given at standard, not high, doses."
+  }
+]

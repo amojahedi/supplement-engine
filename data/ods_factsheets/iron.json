@@ -1,0 +1,20 @@
+[
+  {
+    "chunk_id": "iron-deficiency-anemia",
+    "supplement": "iron",
+    "source": "NIH Office of Dietary Supplements — Iron Fact Sheet for Health Professionals",
+    "text": "Iron deficiency is the most common nutrient deficiency worldwide. Low ferritin reflects depleted iron stores and can cause fatigue and iron-deficiency anemia. Groups at higher risk include menstruating and pregnant people. Oral iron salts are the usual first repletion step."
+  },
+  {
+    "chunk_id": "iron-upper-limit",
+    "supplement": "iron",
+    "source": "NIH Office of Dietary Supplements — Iron Fact Sheet for Health Professionals",
+    "text": "The tolerable upper intake level for adults is 45 mg per day of elemental iron. Higher intakes commonly cause gastrointestinal upset. Excess iron can accumulate in tissues, so supplementation is inappropriate when ferritin is already high."
+  },
+  {
+    "chunk_id": "iron-absorption-timing",
+    "supplement": "iron",
+    "source": "NIH Office of Dietary Supplements — Iron Fact Sheet for Health Professionals",
+    "text": "Iron absorption is reduced by some medications and can chelate levothyroxine, lowering its absorption. Separating iron from interacting drugs by several hours helps preserve the effect of both."
+  }
+]

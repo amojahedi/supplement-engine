@@ -1,0 +1,14 @@
+[
+  {
+    "chunk_id": "b12-deficiency",
+    "supplement": "vitamin_b12",
+    "source": "NIH Office of Dietary Supplements — Vitamin B12 Fact Sheet for Health Professionals",
+    "text": "Vitamin B12 deficiency can cause anemia and neurological symptoms. Vegans and vegetarians are at higher risk because B12 occurs naturally only in animal foods. Correcting folate without addressing B12 can mask B12 deficiency while nerve damage progresses."
+  },
+  {
+    "chunk_id": "b12-metformin",
+    "supplement": "vitamin_b12",
+    "source": "NIH Office of Dietary Supplements — Vitamin B12 Fact Sheet for Health Professionals",
+    "text": "Long-term use of metformin can reduce vitamin B12 absorption and lower serum B12 levels. Periodic monitoring of B12 is reasonable in people taking metformin."
+  }
+]
