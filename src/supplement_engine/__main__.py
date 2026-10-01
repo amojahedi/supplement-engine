@@ -9,6 +9,10 @@ Subcommands:
   guard a profile, log the run to SQLite, and print the run_id + guarded output.
 * ``python -m supplement_engine replay <run_id>``       — reconstruct and print a
   past case entirely offline from SQLite.
+* ``python -m supplement_engine eval``                  — run the full eval harness
+  over base + adversarial, write eval_reports/, and log each case run to SQLite.
+* ``python -m supplement_engine ablation``              — run the rules-disabled
+  naive baseline and write the ablation summary report.
 
 Deterministic throughout. No LLM, no network.
 """
@@ -18,8 +22,14 @@ from __future__ import annotations
 import json
 import sys
 
+from .eval.ablation import run_ablation
+from .eval.ablation import write_reports as write_ablation_reports
+from .eval.cases import adversarial_cases, base_cases
+from .eval.harness import run_eval
+from .eval.harness import write_reports as write_eval_reports
 from .loader import load_profile, raw_profiles
 from .logging_store import connect, load_run, record_run
+from .models import Profile
 from .pipeline import run_case
 from .rules import evaluate
 
@@ -33,6 +43,8 @@ def _usage() -> None:
     print("  python -m supplement_engine <profile_id>        print the decision")
     print("  python -m supplement_engine run <profile_id>    evaluate+guard+log a case")
     print("  python -m supplement_engine replay <run_id>     replay a logged case")
+    print("  python -m supplement_engine eval                run the eval harness + write reports")
+    print("  python -m supplement_engine ablation            run the rules-disabled ablation")
     print(f"available profiles: {ids}")
 
 
@@ -123,6 +135,70 @@ def _cmd_replay(run_id_str: str, db_path: str | None) -> int:
     return 0
 
 
+def _cmd_eval(db_path: str | None, *, no_adversarial: bool = False) -> int:
+    include_adversarial = not no_adversarial
+    report = run_eval(include_adversarial=include_adversarial)
+    md_path, json_path = write_eval_reports(report)
+
+    # Log each case run to the SQLite store (base + converted adversarial profiles
+    # that yield a typed profile). Rejected adversarial cases have no decision.
+    conn = connect(db_path) if db_path else connect()
+    logged = 0
+    try:
+        cases = base_cases() + (adversarial_cases() if include_adversarial else [])
+        for case in cases:
+            if case.is_extraction_target:
+                # Rejected cases produce no decision; skip. Converted cases are
+                # logged via their extracted profile.
+                if case.extraction_expectation == "reject":
+                    continue
+                from .eval.cases import questionnaire_from_record
+                from .extraction import ExtractionError, extract_profile
+
+                try:
+                    profile = extract_profile(
+                        case.bad_labs, questionnaire_from_record(case.record)
+                    ).profile
+                except ExtractionError:
+                    continue
+            else:
+                profile = Profile.model_validate(case.record)
+            decision = evaluate(profile)
+            result = run_case(profile, decision)
+            record_run(
+                conn,
+                profile_id=profile.profile_id,
+                guarded=result.guarded,
+                retrieval_results=result.retrieval_results,
+            )
+            logged += 1
+    finally:
+        conn.close()
+
+    payload = {
+        "banner": _BANNER,
+        "reports": {"markdown": str(md_path), "json": str(json_path)},
+        "logged_runs": logged,
+        "aggregates": report.to_dict()["aggregates"],
+    }
+    print(json.dumps(payload, indent=2))
+    # Non-zero exit if any unsafe output slipped through (CI gate).
+    return 0 if report.overall.unsafe_count == 0 else 2
+
+
+def _cmd_ablation(*, no_adversarial: bool = False) -> int:
+    include_adversarial = not no_adversarial
+    report = run_ablation(include_adversarial=include_adversarial)
+    md_path, json_path = write_ablation_reports(report)
+    payload = {
+        "banner": _BANNER,
+        "reports": {"markdown": str(md_path), "json": str(json_path)},
+        "summary": report.to_dict()["summary"],
+    }
+    print(json.dumps(payload, indent=2))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     if not argv or argv[0] in ("-h", "--help"):
@@ -140,7 +216,16 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         del argv[i : i + 2]
 
+    no_adversarial = False
+    if "--no-adversarial" in argv:
+        no_adversarial = True
+        argv.remove("--no-adversarial")
+
     cmd = argv[0]
+    if cmd == "eval":
+        return _cmd_eval(db_path, no_adversarial=no_adversarial)
+    if cmd == "ablation":
+        return _cmd_ablation(no_adversarial=no_adversarial)
     if cmd == "run":
         if len(argv) < 2:
             print("run requires a <profile_id>", file=sys.stderr)

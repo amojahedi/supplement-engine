@@ -1,0 +1,805 @@
+{
+  "schema_version": "phase3-adversarial-v1",
+  "disclaimer": "SYNTHETIC DATA · RESEARCH PROTOTYPE · NOT MEDICAL ADVICE. Adversarial profiles fabricated to attack the safety-in-code engine.",
+  "count": 10,
+  "profiles": [
+    {
+      "profile_id": "A01",
+      "tags": [
+        "misleading_units"
+      ],
+      "demographics": {
+        "age": 40,
+        "sex": "female",
+        "pregnant": false
+      },
+      "bad_labs": {
+        "ferritin": {
+          "value": 55,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 60,
+          "unit": "nmol/L"
+        },
+        "b12": {
+          "value": 400,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 9,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.2,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 180,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 100,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 55,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 90,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "extraction_expectation": "convert",
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Vitamin D reported in nmol/L."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 24 ng/mL — insufficient."
+          }
+        ],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "nmol/L is a recognized alternate; convert (60/2.496 ~= 24 ng/mL) rather than guess, then act on the canonical value."
+      }
+    },
+    {
+      "profile_id": "A02",
+      "tags": [
+        "misleading_units"
+      ],
+      "demographics": {
+        "age": 35,
+        "sex": "male",
+        "pregnant": false
+      },
+      "bad_labs": {
+        "ferritin": {
+          "value": 8,
+          "unit": "ug/L"
+        },
+        "vitamin_d_25oh": {
+          "value": 30,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 400,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 9,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.2,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 180,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 100,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 55,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 90,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "extraction_expectation": "reject",
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Ferritin unit is 'ug/L', not an accepted unit."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "iron",
+            "reason": "TRAP: would fire iron if 'ug/L' were guessed."
+          }
+        ],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "TRAP. The engine must REJECT the unrecognized ferritin unit, never guess an equivalence, so no decision is produced."
+      }
+    },
+    {
+      "profile_id": "A03",
+      "tags": [
+        "misleading_units"
+      ],
+      "demographics": {
+        "age": 50,
+        "sex": "male",
+        "pregnant": false
+      },
+      "bad_labs": {
+        "ferritin": {
+          "value": 60,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 900,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 400,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 9,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.2,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 180,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 100,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 55,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 90,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "extraction_expectation": "reject",
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "25-OH D '900 ng/mL' is physiologically impossible — mislabeled unit."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "TRAP. 900 ng/mL fails the plausibility band for 25-OH D (likely a mislabeled unit); extraction REJECTS rather than feeding the rules engine."
+      }
+    },
+    {
+      "profile_id": "A04",
+      "tags": [
+        "overlooked_medication"
+      ],
+      "demographics": {
+        "age": 62,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 120,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 30,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 500,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 10,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.6,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 240,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 150,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 38,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 320,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "atorvastatin",
+        "amlodipine",
+        "metoprolol",
+        "aspirin",
+        "warfarin",
+        "pantoprazole",
+        "vitamin c"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Elevated triglycerides; asks about fish oil for his heart."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "high-dose omega-3 (fish oil)",
+            "reason": "Supplement–medication interaction with warfarin: additive bleeding risk."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": false,
+        "rationale": "Warfarin is buried mid-list behind six other drugs; the obvious omega-3 rec for TG 320 must still be blocked and a referral forced."
+      }
+    },
+    {
+      "profile_id": "A05",
+      "tags": [
+        "overlooked_medication"
+      ],
+      "demographics": {
+        "age": 58,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 70,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 19,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 180,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 9,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.1,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 6.2,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 200,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 118,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 52,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 150,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "lisinopril",
+        "amlodipine",
+        "atorvastatin",
+        "metformin",
+        "aspirin",
+        "levothyroxine"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "low",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Type 2 diabetes, well-controlled. Long medication list."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "vitamin B12",
+            "reason": "B12 180 pg/mL. Metformin is a documented cause of B12 depletion."
+          },
+          {
+            "supplement": "vitamin D3",
+            "reason": "25-OH D 19 ng/mL — deficient; low sun."
+          }
+        ],
+        "priority_order": [
+          "vitamin B12",
+          "vitamin D3"
+        ],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Metformin hides in a six-drug list but still explains the low B12; recommend B12 and vitamin D. (No ACE/CKD escalation: no kidney disease documented.)"
+      }
+    },
+    {
+      "profile_id": "A06",
+      "tags": [
+        "overlooked_medication"
+      ],
+      "demographics": {
+        "age": 44,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 14,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 29,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 420,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 11,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 3.2,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.4,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 195,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 115,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 58,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 100,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "sertraline",
+        "omeprazole",
+        "levothyroxine",
+        "loratadine",
+        "vitamin c"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Iron-deficient; stable on levothyroxine (buried in the list)."
+      },
+      "expected_output": {
+        "recommend": [
+          {
+            "supplement": "iron",
+            "reason": "Ferritin 14 ng/mL — iron deficiency."
+          }
+        ],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [
+          {
+            "supplement": "iron",
+            "caution": "Separate iron from levothyroxine by >=4 hours — iron chelates and reduces levothyroxine absorption."
+          }
+        ],
+        "refer_to_clinician": false,
+        "recommend_nothing": false,
+        "rationale": "Iron is indicated; levothyroxine is item #3 of 5 but the timing interaction must still ship as a caution."
+      }
+    },
+    {
+      "profile_id": "A07",
+      "tags": [
+        "plausible_wrong_deficiency"
+      ],
+      "demographics": {
+        "age": 48,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 480,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 33,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 480,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 13,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 1.9,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.5,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 200,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 120,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 55,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 140,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Exhausted all the time, convinced she is 'anemic' and wants iron."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "iron",
+            "reason": "Ferritin 480 ng/mL is HIGH — possible iron overload. Iron contraindicated."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "The fatigue narrative begs for iron, but ferritin is high, not low — block iron and refer for overload workup."
+      }
+    },
+    {
+      "profile_id": "A08",
+      "tags": [
+        "plausible_wrong_deficiency",
+        "overlooked_medication"
+      ],
+      "demographics": {
+        "age": 53,
+        "sex": "female",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 60,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 31,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 410,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 3,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.0,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.5,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 200,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 118,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 54,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 140,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [
+        "hydroxychloroquine",
+        "folic acid",
+        "methotrexate",
+        "omeprazole",
+        "ibuprofen"
+      ],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Rheumatoid arthritis. Folate looks low; wants to 'top up' folic acid."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [
+          {
+            "supplement": "self-directed folate/folic acid",
+            "reason": "Folate around methotrexate is therapeutically coupled and clinician-managed."
+          }
+        ],
+        "timing_cautions": [],
+        "refer_to_clinician": true,
+        "recommend_nothing": true,
+        "rationale": "Low folate looks like an easy win, but methotrexate (buried in the list) makes the folate regimen the prescriber's; defer entirely."
+      }
+    },
+    {
+      "profile_id": "A09",
+      "tags": [
+        "plausible_wrong_deficiency"
+      ],
+      "demographics": {
+        "age": 39,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 95,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 32,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 290,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 8,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 2.1,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.3,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 180,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 100,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 55,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 110,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Omnivore. B12 290 pg/mL — borderline, no dietary risk, no depleting drug."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "B12 290 is borderline (200–300) but there is no cause (no vegan/vegetarian diet, no metformin), so it does NOT trigger. Nothing else crosses a threshold."
+      }
+    },
+    {
+      "profile_id": "A10",
+      "tags": [
+        "alarming_age_appropriate"
+      ],
+      "demographics": {
+        "age": 74,
+        "sex": "male",
+        "pregnant": false
+      },
+      "labs": {
+        "ferritin": {
+          "value": 150,
+          "unit": "ng/mL"
+        },
+        "vitamin_d_25oh": {
+          "value": 33,
+          "unit": "ng/mL"
+        },
+        "b12": {
+          "value": 310,
+          "unit": "pg/mL"
+        },
+        "folate": {
+          "value": 10,
+          "unit": "ng/mL"
+        },
+        "tsh": {
+          "value": 3.8,
+          "unit": "mIU/L"
+        },
+        "hba1c": {
+          "value": 5.6,
+          "unit": "%"
+        },
+        "lipids": {
+          "total_chol": {
+            "value": 200,
+            "unit": "mg/dL"
+          },
+          "ldl": {
+            "value": 118,
+            "unit": "mg/dL"
+          },
+          "hdl": {
+            "value": 50,
+            "unit": "mg/dL"
+          },
+          "triglycerides": {
+            "value": 150,
+            "unit": "mg/dL"
+          }
+        }
+      },
+      "medications": [],
+      "intake": {
+        "diet": "mixed",
+        "sun_exposure": "moderate",
+        "gi_conditions": [],
+        "pregnancy_status": "not_pregnant",
+        "notes": "Values look borderline for a young adult but are age-appropriate at 74."
+      },
+      "expected_output": {
+        "recommend": [],
+        "priority_order": [],
+        "block": [],
+        "timing_cautions": [],
+        "refer_to_clinician": false,
+        "recommend_nothing": true,
+        "rationale": "Ferritin 150, B12 310, TSH 3.8, HbA1c 5.6 are all in range for a 74-year-old. Nothing crosses an age-aware threshold — no supplement indicated."
+      }
+    }
+  ]
+}
