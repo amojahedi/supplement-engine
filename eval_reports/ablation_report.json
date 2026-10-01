@@ -1,0 +1,428 @@
+{
+  "banner": "SYNTHETIC DATA \u00b7 RESEARCH PROTOTYPE \u00b7 NOT MEDICAL ADVICE",
+  "note": "The 'naive baseline' is a deterministic straw-man standing in for an unconstrained model deciding alone. It is NOT an LLM and NOT clinical logic. It ignores the interaction table, escalation rules, UL ceilings, and priority ordering \u2014 the safety value the rules engine adds.",
+  "summary": {
+    "n_cases": 38,
+    "naive_unsafe_count": 16,
+    "naive_unsafe_rate": 0.42105263157894735,
+    "engine_unsafe_count": 0,
+    "safety_gap": 16,
+    "failure_mode_breakdown": {
+      "dangerous_recommendation": 5,
+      "missed_referral_only": 11
+    }
+  },
+  "rows": [
+    {
+      "profile_id": "P01",
+      "source": "base",
+      "naive_recommend": [
+        "iron",
+        "vitamin D3"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P02",
+      "source": "base",
+      "naive_recommend": [
+        "high-dose omega-3 (fish oil)"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "recommended a blocked supplement: ['omega3']",
+        "dropped a required clinician referral (naive never refers)",
+        "emitted block-only high-dose recommendation: ['omega3']",
+        "emitted a 'high-dose' recommendation over a UL: ['high-dose omega-3 (fish oil)']"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P03",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P04",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P05",
+      "source": "base",
+      "naive_recommend": [
+        "iron",
+        "vitamin D3"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P06",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin B12"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P07",
+      "source": "base",
+      "naive_recommend": [
+        "iron"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P08",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P09",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3",
+        "vitamin B12"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P10",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P11",
+      "source": "base",
+      "naive_recommend": [
+        "iron"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P12",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P13",
+      "source": "base",
+      "naive_recommend": [
+        "iron",
+        "vitamin D3",
+        "vitamin B12",
+        "folate"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P14",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3",
+        "folate"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "recommended a blocked supplement: ['folate']",
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P15",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P16",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P17",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P18",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P19",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P20",
+      "source": "base",
+      "naive_recommend": [
+        "high-dose omega-3 (fish oil)"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)",
+        "emitted block-only high-dose recommendation: ['omega3']",
+        "emitted a 'high-dose' recommendation over a UL: ['high-dose omega-3 (fish oil)']"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P21",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin B12",
+        "folate"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P22",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P23",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P24",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P25",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P26",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P27",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3",
+        "folate"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P28",
+      "source": "base",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P29",
+      "source": "base",
+      "naive_recommend": [
+        "iron",
+        "vitamin D3",
+        "vitamin B12",
+        "folate"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "P30",
+      "source": "base",
+      "naive_recommend": [],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "A01",
+      "source": "adversarial",
+      "naive_recommend": [
+        "vitamin D3"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "A04",
+      "source": "adversarial",
+      "naive_recommend": [
+        "high-dose omega-3 (fish oil)"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "recommended a blocked supplement: ['omega3']",
+        "dropped a required clinician referral (naive never refers)",
+        "emitted block-only high-dose recommendation: ['omega3']",
+        "emitted a 'high-dose' recommendation over a UL: ['high-dose omega-3 (fish oil)']"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "A05",
+      "source": "adversarial",
+      "naive_recommend": [
+        "vitamin D3",
+        "vitamin B12"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "A06",
+      "source": "adversarial",
+      "naive_recommend": [
+        "iron"
+      ],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "A07",
+      "source": "adversarial",
+      "naive_recommend": [],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "A08",
+      "source": "adversarial",
+      "naive_recommend": [
+        "folate"
+      ],
+      "naive_unsafe": true,
+      "naive_unsafe_reasons": [
+        "recommended a blocked supplement: ['folate']",
+        "dropped a required clinician referral (naive never refers)"
+      ],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "A09",
+      "source": "adversarial",
+      "naive_recommend": [],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    },
+    {
+      "profile_id": "A10",
+      "source": "adversarial",
+      "naive_recommend": [],
+      "naive_unsafe": false,
+      "naive_unsafe_reasons": [],
+      "engine_unsafe": false
+    }
+  ]
+}
